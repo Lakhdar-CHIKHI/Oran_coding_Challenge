@@ -23,8 +23,8 @@ export class AuthService {
     login(authLogin: AuthLoginInfo):Observable<any> {
       return this.http.post(this.authUrl, {
         grant_type: 'password',
-        client_id: '2',
-        client_secret: '9PKLNF0ziJ0LhsgM1LC7W2LVT6dhzxsmvdPs1ski',
+        client_id: '{Client ID}',
+        client_secret: '{Client Secret}',
         username: authLogin.email,
         password: authLogin.password,
         scope: ''

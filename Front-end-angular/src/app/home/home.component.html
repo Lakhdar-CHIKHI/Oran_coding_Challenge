@@ -1,0 +1,199 @@
+<!-- <div class="container">
+    <div class="row pt-5 pb-5">
+        <div class="col-md-6">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h6>JWT generated</h6>
+                </div>
+                <div class="card-body">
+                    <pre>{{accessToken | json}}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h6>Authenticated user's details</h6>
+                </div>
+                <div class="card-body">
+                    <pre>{{accessTokenDetails | json}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex flex-row justify-content-center align-content-center">
+            <button class="btn btn-danger" (click)="logout()" [disabled]="loading">Logout</button>
+        </div>
+    </div>
+</div> -->
+<!--<p>bookmark works!</p>-->
+<!--<div class="terminal">-->
+<!--  <pre>ng generate component xyz</pre>-->
+<!--</div>-->
+<nav class="navbar navbar-dark bg-dark">
+  <span class="navbar-brand mb-0 h1">Todos</span>
+  <span class="navbar-brand mb-0 h1">
+    {{accessTokenDetails.email}}
+  </span>
+    <button class="btn btn-danger" (click)="logout()" [disabled]="loading">Logout</button>
+</nav>
+
+<div class="card center">
+    <div class="card-body">
+      <div class="row">
+            
+        <div class="col-sm-6">
+          <div class="card" style="box-shadow: 0 0 20px;">
+            <nav aria-label="breadcrumb" >
+              <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active h5 text-white" aria-current="page">Categories</li>
+              </ol>
+            </nav>
+            <div class="scrollbar scrollbox scrollbar-sidebar scrollbar-container ps ps--active-y ps--scrolling-y">
+              <ul class="list-group ul-list scrollbox-content overflow">
+                <li class="list-group-item" *ngFor="let category of categories">
+                  <div>
+                    <label class="form-check-label h5">{{category?.category}}</label>
+                    <span class="ml-2 badge bg-success" *ngIf="category?.share;else span_else">Shared</span>
+                    <ng-template #span_else>
+                      <span class="ml-2 badge bg-danger">Not Shared</span>
+                    </ng-template>
+                    <ng-container *ngIf="category?.user_id==accessTokenDetails?.id">
+                      <button (click)="shareCategory(category)" *ngIf="category?.share;else span_else_" class="btn btn-sm btn-mobile btn-primary float-right ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                          <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                        </svg> Stop Shared
+                      </button>
+                      <ng-template #span_else_>
+                        <button (click)="shareCategory(category)" class="btn btn-sm btn-primary btn-mobile float-right ml-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                            <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                          </svg> Shared
+                        </button>
+                      </ng-template>
+                    
+                    
+                    <button (click)="deleteCategory(category)" class="btn btn-sm btn-danger btn-mobile float-right">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                      Delete
+                    </button>
+                  </ng-container>
+                    <button (click)="selectCategory(category)" class="mr-2 btn btn-sm btn-success btn-mobile float-right">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                      </svg>
+                      Select
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <br>
+            <nav aria-label="breadcrumb" >
+              <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active h5 text-white" aria-current="page">Add Category</li>
+              </ol>
+            </nav>
+            <div class="card-body">
+              <form name="formCategory" #f="ngForm" (ngSubmit)="f.form.valid && AddCategory()" novalidate="novalidate">
+                  <div class="form-group">
+                    <label for="text">Category</label>
+                      <input type="text" required minlength="3" name="category" placeholder="Category" [(ngModel)]="categor.category" #category="ngModel" class="form-control" />
+                      <div *ngIf="f.submitted && category.invalid" class="fv-plugins-message-container">
+                          <span data-field="category" *ngIf="category.errors.required" class="fv-help-block">Category est requis</span>
+                          <span data-field="category" *ngIf="category.errors.minlength" class="fv-help-block">Category must be at least 3 characters long</span>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" (change)="changeShare($event)">
+                      <label class="form-check-label pt-sm-1" for="disabledFieldsetCheck">Can share with other users</label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add Category</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-6">
+          <div class="card" style="box-shadow: 0 0 20px;">
+            <nav aria-label="breadcrumb" >
+              <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active h5 text-white" aria-current="page">Tasks</li>
+              </ol>
+            </nav>
+            <div class="scrollbar scrollbox scrollbar-sidebar scrollbar-container ps ps--active-y ps--scrolling-y">
+              <ul class="list-group ul-list scrollbox-content overflow">
+                <ng-container *ngIf="tasks.length;else empty">
+                  <li class="list-group-item" *ngFor="let task of tasks">
+                    <div>
+                      <label class="form-check-label h5">{{task?.text}}</label>
+                      <span class="ml-2 badge bg-success" *ngIf="task?.finished;else span_else_f">Finished</span>
+                      <ng-template #span_else_f>
+                        <span class="ml-2 badge bg-danger">Not Finished</span>
+                      </ng-template>
+                      
+                      <button (click)="finishedTask(task)" *ngIf="!task?.finished" class="btn btn-sm btn-primary float-right ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                          <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                        </svg> Finished
+                      </button>
+                      <button (click)="deleteTask(task)" class="btn btn-sm btn-danger float-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        Delete
+                      </button>
+                    </div>
+                  </li>
+                </ng-container>
+                <ng-template #empty>
+                  <li class="list-group-item text-center">
+                    Select one of categories
+                  </li>
+                </ng-template>
+              </ul>
+            </div>
+            <br>
+            <nav aria-label="breadcrumb" >
+              <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active h5 text-white" aria-current="page">Add Task</li>
+              </ol>
+            </nav>
+            <div class="card-body">
+              <form name="formTask" #f_="ngForm" (ngSubmit)="f_.form.valid && AddTask()" novalidate="novalidate">
+                  <div class="form-group">
+                    <label for="text">Task</label>
+                      <input type="text" required minlength="3" name="text" placeholder="Task" [(ngModel)]="task.text" #text="ngModel" class="form-control" />
+                      <div *ngIf="f.submitted && text.invalid" class="fv-plugins-message-container">
+                          <span data-field="text" *ngIf="text.errors.required" class="fv-help-block">task is required</span>
+                          <span data-field="text" *ngIf="text.errors.minlength" class="fv-help-block">task must be at least 3 characters long</span>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="text">Category</label>
+                    <select class="form-select form-select-sm form-control" name="category" [(ngModel)]="task.category_id" aria-placeholder="test">
+                      <option *ngFor="let category of categories" value="{{category?.id}}">{{category?.category}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" (change)="finished($event)">
+                      <label class="form-check-label pt-sm-1" for="disabledFieldsetCheck">Finished</label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add Task</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

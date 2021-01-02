@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col d-flex flex-row justify-content-center align-content-center pt-5 pb-5">
+            <div class="card">
+                <div class="card-body">
+                    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate="novalidate">
+                        <h5 class="card-title text-center">Authentication form</h5>
+                        <p class="card-text">Fill the following form and click on the <strong>Login</strong> button to
+                            access the home page</p>
+                        <div class="row" *ngIf="errors">
+                            <div class="col">
+                                <div class="alert alert-danger">
+                                    <strong>Oops!</strong> You have entered invalid credentials
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" required name="email" placeholder="Email" [(ngModel)]="authLogin.email" #email="ngModel" />
+                                    <div *ngIf="f.submitted && email.invalid" class="fv-plugins-message-container">
+                                        <span data-field="email" *ngIf="email.errors.required" class="fv-help-block">email est requis</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" required minlength="3" name="password" placeholder="Password" [(ngModel)]="authLogin.password" #password="ngModel" />
+                                    <div *ngIf="f.submitted && password.invalid" class="fv-plugins-message-container">
+                                        <span data-field="password" *ngIf="password.errors.required" class="fv-help-block">password est requis</span>
+                                        <span data-field="password" *ngIf="password.errors.minlength" class="fv-help-block">Password must be at least 3 characters long</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex flex-row justify-content-center align-content-center">
+                                <button type="submit" class="btn btn-success col-5" [disabled]="loading">Login</button>
+                                <button routerLink="/register" class="btn btn-info ml-2 col-5" >Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

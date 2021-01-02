@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col d-flex flex-row justify-content-center align-content-center pt-5 pb-5">
+            <div class="card col-xl-8" style="box-shadow: 0 0 20px;">
+                <div class="card-body col-xl-12">
+                    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && register()">
+                        <h5 class="card-title text-center">Register form</h5>
+                        <div class="row" *ngIf="errors">
+                            <div class="col">
+                                <div class="alert alert-danger">
+                                    <strong>Oops!</strong> You have entered invalid credentials
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="text">Name</label>
+                                    <input type="text" required minlength="3" name="name" placeholder="Name" [(ngModel)]="signup.name" #name="ngModel" class="form-control" />
+                                    <div *ngIf="f.submitted && name.invalid" class="fv-plugins-message-container">
+                                        <span data-field="name" *ngIf="name.errors.required" class="fv-help-block">Name est requis</span>
+                                        <span data-field="name" *ngIf="name.errors.minlength" class="fv-help-block">Name must be at least 3 characters long</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" required name="email" placeholder="Email" [(ngModel)]="signup.email" #email="ngModel" />
+                                    <div *ngIf="f.submitted && email.invalid" class="fv-plugins-message-container">
+                                        <span data-field="email" *ngIf="email.errors.required" class="fv-help-block">email est requis</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" required minlength="3" name="password" placeholder="Password" [(ngModel)]="signup.password" #password="ngModel" />
+                                    <div *ngIf="f.submitted && password.invalid" class="fv-plugins-message-container">
+                                        <span data-field="password" *ngIf="password.errors.required" class="fv-help-block">password est requis</span>
+                                        <span data-field="password" *ngIf="password.errors.minlength" class="fv-help-block">Password must be at least 3 characters long</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">c_Password</label>
+                                    <input type="password" class="form-control" required minlength="3" name="c_password" placeholder="Password" [(ngModel)]="signup.c_password" #c_password="ngModel" />
+                                    <div *ngIf="f.submitted && c_password.invalid" class="fv-plugins-message-container">
+                                        <span data-field="c_password" *ngIf="c_password.errors.required" class="fv-help-block">password est requis</span>
+                                        <span data-field="c_password" *ngIf="c_password.errors.minlength" class="fv-help-block">Password must be at least 3 characters long</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex flex-row justify-content-center align-content-center">
+                                <button type="submit"  class="btn btn-success col-5" >Register</button>
+                                <button routerLink="/login" class="btn btn-info ml-2 col-5">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

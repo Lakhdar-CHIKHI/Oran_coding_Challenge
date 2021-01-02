@@ -1,0 +1,5 @@
+@media only screen and (max-width: 600px) {
+    .btn-mobile {
+        font-size: .570rem;
+    }
+  }
